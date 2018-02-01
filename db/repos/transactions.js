@@ -19,13 +19,14 @@ var transactionTypes = require('../../helpers/transaction_types');
 var columnSet;
 
 /**
- * Transactions database interaction module
- * @memberof module:transactions
+ * Transactions database interaction class.
+ *
  * @class
+ * @memberof db.repos
+ * @see Parent: {@link db.repos}
  * @param {Database} db - Instance of database object from pg-promise
  * @param {Object} pgp - pg-promise instance to utilize helpers
- * @constructor
- * @return {TransactionsRepo}
+ * @returns {Object} - An instance of a TransactionsRepo
  */
 function TransactionsRepo(db, pgp) {
 	this.db = db;
@@ -131,35 +132,42 @@ var Queries = {
 };
 
 /**
- * Count total transactions
+ * Count total transactions.
+ *
  * @return {Promise}
+ * @todo Add desription for the return value
  */
 TransactionsRepo.prototype.count = function () {
 	return this.db.one(Queries.count).then(result => result.count);
 };
 
 /**
- * Count transactions by Id
+ * Count transactions by Id.
+ *
  * @param {string} id
  * @return {Promise}
+ * @todo Add descriptions for the params and the return value
  */
 TransactionsRepo.prototype.countById = function (id) {
 	return this.db.one(Queries.countById, [id]).then(result => result.count);
 };
 
 /**
- * Count transactions with extended params
+ * Count transactions with extended params.
+ *
  * @param {Object} params
  * @param {Array} params.where
  * @param {string} params.owner
  * @return {Promise}
+ * @todo Add descriptions for the params and the return value
  */
 TransactionsRepo.prototype.countList = function (params) {
 	return this.db.query(Queries.countList(params), params);
 };
 
 /**
- * Search transactions
+ * Search transactions.
+ *
  * @param {Object} params
  * @param {Array} params.where
  * @param {string} params.owner
@@ -168,87 +176,106 @@ TransactionsRepo.prototype.countList = function (params) {
  * @param {int} params.limit
  * @param {int} params.offset
  * @return {Promise}
+ * @todo Add descriptions for the params and the return value
  */
 TransactionsRepo.prototype.list = function (params) {
 	return this.db.query(Queries.list(params), params);
 };
 
 /**
- * Get transfer transactions by Ids
+ * Get transfer transactions by Ids.
+ *
  * @param {Array.<string>} ids
  * @return {Promise}
+ * @todo Add descriptions for the params and the return value
  */
 TransactionsRepo.prototype.getTransferByIds = function (ids) {
 	return this.db.query(Queries.getTransferByIds, [ids]);
 };
 
 /**
- * Get vote transactions by Ids
+ * Get vote transactions by Ids.
+ *
  * @param {Array.<string>} ids
  * @return {Promise}
+ * @todo Add descriptions for the params and the return value
  */
 TransactionsRepo.prototype.getVotesByIds = function (ids) {
 	return this.db.query(Queries.getVotesByIds, [ids]);
 };
 
 /**
- * Get delegate transactions by Ids
+ * Get delegate transactions by Ids.
+ *
  * @param {Array.<string>} ids
  * @return {Promise}
+ * @todo Add descriptions for the params and the return value
  */
 TransactionsRepo.prototype.getDelegateByIds = function (ids) {
 	return this.db.query(Queries.getDelegateByIds, [ids]);
 };
 
 /**
- * Get signature transactions by Ids
+ * Get signature transactions by Ids.
+ *
  * @param {Array.<string>} ids
  * @return {Promise}
+ * @todo Add descriptions for the params and the return value
  */
 TransactionsRepo.prototype.getSignatureByIds = function (ids) {
 	return this.db.query(Queries.getSignatureByIds, [ids]);
 };
 
 /**
- * Get multisignature transactions by Ids
+ * Get multisignature transactions by Ids.
+ *
  * @param {Array.<string>} ids
  * @return {Promise}
+ * @todo Add descriptions for the params and the return value
  */
 TransactionsRepo.prototype.getMultiByIds = function (ids) {
 	return this.db.query(Queries.getMultiByIds, [ids]);
 };
 
 /**
- * Get dapp transactions by Ids
+ * Get dapp transactions by Ids.
+ *
  * @param {Array.<string>} ids
  * @return {Promise}
+ * @todo Add descriptions for the params and the return value
  */
 TransactionsRepo.prototype.getDappByIds = function (ids) {
 	return this.db.query(Queries.getDappByIds, [ids]);
 };
 
 /**
- * Get intransfer transactions by Ids
+ * Get intransfer transactions by Ids.
+ *
  * @param {Array.<string>} ids
  * @return {Promise}
+ * @todo Add descriptions for the params and the return value
  */
 TransactionsRepo.prototype.getInTransferByIds = function (ids) {
 	return this.db.query(Queries.getInTransferByIds, [ids]);
 };
 
 /**
- * Get outtransfer transactions by Ids
+ * Get outtransfer transactions by Ids.
+ *
  * @param {Array.<string>} ids
  * @return {Promise}
+ * @todo Add descriptions for the params and the return value
  */
 TransactionsRepo.prototype.getOutTransferByIds = function (ids) {
 	return this.db.query(Queries.getOutTransferByIds, [ids]);
 };
 
 /**
- * Save transactions to database
+ * Save transactions to database.
+ *
  * @param {Array.<Object>} transactions - Each object should justify *logic/transaction.prototype.schema*
  * @return {Promise}
+ * @todo Add descriptions for the params and the return value
  */
 TransactionsRepo.prototype.save = function (transactions) {
 	var self = this;
